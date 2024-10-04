@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-=&l*li&=rn!@$a^68y2khfq&w5zms466gvace@6_xa)kh=)%%+
 DEBUG = True
 ROOT_URLCONF = 'config.urls'
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -14,9 +14,10 @@ STATIC_URL = 'static/'
 STATIC_ROOT_PATH = BASE_DIR / "storage/static"
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'storage/media'
+AUTH_USER_MODEL = "accounts.User"
 ALLOWED_HOSTS = []
 
-APPLICATIONS = ['core', 'book']
+APPLICATIONS = ['core', 'book', 'accounts']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

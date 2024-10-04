@@ -22,8 +22,14 @@ from apps.book.models import Author, Book, Category  # noqa:E402
 # print(Book.objects.get(id=9).title)
 # print(Book.objects.all())
 # print(Book.objects.filter(id__gte=1))
-print("Deleted: ", Book.objects.deleted().undelete())
-print("All: ", Book.objects.all())
+# print("Deleted: ", Book.objects.deleted().undelete())
+# print("All: ", Book.objects.all())
 
+
+from apps.accounts.models import User
+
+# print(User.objects.all()[0])
+
+User.objects.create_superuser('yazdan', password="1")
 
 # books = mixer.cycle(6).blend(Book)
