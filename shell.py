@@ -26,10 +26,10 @@ from apps.book.models import Author, Book, Category  # noqa:E402
 # print("All: ", Book.objects.all())
 
 
-from apps.accounts.models import User
+# from apps.accounts.models import User
 
 # print(User.objects.all()[0])
 
-User.objects.create_superuser('yazdan', password="1")
+# User.objects.create_superuser('yazdan', password="1")
 
-# books = mixer.cycle(6).blend(Book)
+books = mixer.cycle(10).blend(Book)
