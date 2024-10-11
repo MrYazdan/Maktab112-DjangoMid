@@ -16,6 +16,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'storage/media'
 AUTH_USER_MODEL = "accounts.User"
 ALLOWED_HOSTS = []
+CACHE_MIDDLEWARE_SECONDS = 5 * 60
 
 APPLICATIONS = ['core', 'book', 'accounts']
 
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -47,7 +50,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,6 +87,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CACHES = {
+    # "default": {
+    #     "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+    #     "LOCATION": "my_cache_table",
+    # }
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cached_file",
+    }
+}
 
 if DEBUG:
     STATICFILES_DIRS = [
