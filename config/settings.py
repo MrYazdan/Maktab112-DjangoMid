@@ -45,6 +45,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.core.middleware.ResponseTimeMiddleware',
+    'apps.core.middleware.DailyVisitMiddleware',
+    'apps.core.middleware.UserActivityMiddleware',
+    # 'apps.core.middleware.simple_middleware'
+    # 'apps.core.middleware.SimpleMiddleware'
+    # 'apps.core.middleware.BetterSimpleMiddleware'
 ]
 
 TEMPLATES = [
@@ -70,7 +76,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    # "activity": {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'activity-db.sqlite3',
+    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -99,6 +109,8 @@ CACHES = {
     }
 }
 
+# DATABASE_ROUTERS = ["apps.core.db_router.CoreRouter"]
+
 if DEBUG:
     STATICFILES_DIRS = [
         STATIC_ROOT_PATH,
@@ -107,3 +119,4 @@ else:
     STATIC_ROOT = STATIC_ROOT_PATH
 
 
+DATETIME_FORMAT = "%Y/%b/%d %H:%M:%S"

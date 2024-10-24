@@ -18,6 +18,6 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
 
     def get(self, request, *args, **kwargs):
-        sleep(5)
-        print("Salam be hame !")
+        # sleep(5)
+        # print("Salam be hame !")
         return super().get(request, *args, **kwargs)
