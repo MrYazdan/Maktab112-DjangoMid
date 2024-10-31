@@ -38,21 +38,11 @@ class DailyVisit(models.Model):
         unique_together = "url", "date"
 
 
-class ActivityManager(models.Manager):
-    def db_manager(self, using="activity", hints=None):
-        return super().db_manager(using, hints)
-
-    def using(self, alias="activity"):
-        return super().using(alias)
-
-
 class UserActivity(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, default=None, editable=False)
     ip = models.GenericIPAddressField(editable=False)
     url = models.CharField(max_length=255, editable=False)
-
-    objects = ActivityManager()
 
     @property
     def timestamp_at(self):

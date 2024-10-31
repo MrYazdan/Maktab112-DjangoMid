@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from tutorial.settings import BASE_DIR
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-=&l*li&=rn!@$a^68y2khfq&w5zms466gvace@6_xa)kh=)%%+'
@@ -77,6 +79,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'postgres',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'maktab112',
+    #     'PORT': 5432,
+    #     'HOST': "0.0.0.0"
+    # },
     # "activity": {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'activity-db.sqlite3',
@@ -109,7 +119,7 @@ CACHES = {
     }
 }
 
-# DATABASE_ROUTERS = ["apps.core.db_router.CoreRouter"]
+# DATABASE_ROUTERS = ["apps.core.db_router.ActivityRouter"]
 
 if DEBUG:
     STATICFILES_DIRS = [
@@ -118,5 +128,44 @@ if DEBUG:
 else:
     STATIC_ROOT = STATIC_ROOT_PATH
 
-
 DATETIME_FORMAT = "%Y/%b/%d %H:%M:%S"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "style": "{",
+            'format': "{levelname} {message}"
+        },
+        "verbose": {
+            "style": "{",
+            'format': "{levelname} {message} {asctime} {module} {message}"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple"
+        },
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "errors.log",
+            "formatter": "verbose"
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": True
+        }
+    }
+}
+
+# import logging
+# logger = logging.getLogger(__name__)
+#
+# logger.error("Salam be hame")

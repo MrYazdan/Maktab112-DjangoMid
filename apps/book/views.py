@@ -20,4 +20,5 @@ class BookListCreateAPIView(generics.ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         # sleep(5)
         # print("Salam be hame !")
+        3 / 0
         return super().get(request, *args, **kwargs)
