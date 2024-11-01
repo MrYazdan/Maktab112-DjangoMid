@@ -1,9 +1,6 @@
 from pathlib import Path
 
-from tutorial.settings import BASE_DIR
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = 'django-insecure-=&l*li&=rn!@$a^68y2khfq&w5zms466gvace@6_xa)kh=)%%+'
 DEBUG = True
 ROOT_URLCONF = 'config.urls'
@@ -43,7 +40,7 @@ MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -115,7 +112,7 @@ CACHES = {
     # }
     "default": {
         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": BASE_DIR / "cached_file",
+        "LOCATION": BASE_DIR / "tmp/cached_files",
     }
 }
 
@@ -165,7 +162,22 @@ LOGGING = {
     }
 }
 
-# import logging
-# logger = logging.getLogger(__name__)
-#
-# logger.error("Salam be hame")
+
+
+# Email configurations:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = "maktab@mryazdan.ir"
+
+if DEBUG:
+    EMAIL_HOST = "localhost"
+    EMAIL_PORT = 2525
+    EMAIL_HOST_USER = ""
+    EMAIL_HOST_PASSWORD = ""
+    EMAIL_USE_TLS = False
+
+else:
+    EMAIL_HOST = "smtp.c1.liara.email"
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = "stoic_bhabha_dtvh2r"
+    EMAIL_HOST_PASSWORD = "95b2fd7c-21c16eec6b7f"
+    EMAIL_USE_TLS = True

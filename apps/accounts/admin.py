@@ -6,10 +6,10 @@ from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ("phone", "first_name", "last_name", "is_staff")
+    list_display = ("email", "first_name", "last_name", "is_staff")
     ordering = ('id',)
     fieldsets = (
-        (None, {"fields": ("phone", "password")}),
+        (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),
         (
             _("Permissions"),
