@@ -2,6 +2,8 @@ import os
 import django
 import logging
 
+from config.settings import USE_I18N
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
@@ -25,8 +27,8 @@ django.setup()
 # print("Deleted: ", Book.objects.deleted().undelete())
 # print("All: ", Book.objects.all())
 
-from apps.accounts.models import User
-User.objects.create(email="ismr3@gmailpo.co")
+# from apps.accounts.models import User
+# User.objects.create(email="ismr3@gmailpo.co")
 
 # print(User.objects.all()[0])
 # User.objects.create_superuser('yazdan', password="1")
@@ -49,3 +51,9 @@ User.objects.create(email="ismr3@gmailpo.co")
 # start_time = time()
 # mail.send()
 # print(f"{time()-start_time}s")
+
+# from apps.book.models import Book
+# Book.objects.create(title="kelile va demne", price=120_000)
+from apps.accounts.models import User
+
+print(User.objects.last().is_online)

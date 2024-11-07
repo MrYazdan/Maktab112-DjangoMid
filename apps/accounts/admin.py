@@ -24,6 +24,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+        ("Friends", {"fields": ("friends",)}),
     )
 
 

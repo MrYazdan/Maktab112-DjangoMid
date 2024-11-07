@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser, UserManager
@@ -36,8 +37,13 @@ class User(AbstractUser):
     password = models.CharField(max_length=128, null=True)
     email = models.EmailField(unique=True, null=False)
     # phone = models.CharField(max_length=11, help_text="max number = 11 char", unique=True)
+    friends = models.ManyToManyField('self', related_name="friend_of", symmetrical=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+
+class FakeUser(models.Model):
+    name = models.CharField(max_length=100)
