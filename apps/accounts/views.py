@@ -7,6 +7,9 @@ from django.shortcuts import render, redirect
 from django.core.cache import cache
 from django.urls import reverse_lazy
 from django.views import View
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import permissions
 
 from apps.accounts.models import User
 from services.mail import MailProvider
@@ -68,6 +71,21 @@ class Verify(View):
         return redirect("/")
 
 
+# class GuestUser(permissions.BasePermission):
+#
+#     def has_permission(self, request, view):
+#         return not request.user.is_authenticated
 
 
+class Welcome(APIView):
+    # permission_classes = [GuestUser]
+    permission_classes = [permissions.IsAuthenticated]\
 
+    def get(self, request):
+        user = request.user
+
+        print(request.COOKIES)
+
+        res = Response({"message": f"Welcome {user.email}"})
+        res.set_cookie("name", "sina", 100)
+        return res

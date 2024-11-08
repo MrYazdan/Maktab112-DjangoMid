@@ -29,6 +29,8 @@ INSTALLED_APPS = [
 
     # Third-party applications:
     "rest_framework",
+    'rest_framework_simplejwt',
+    # 'rest_framework.authtoken',
 
     # Applications:
     *list(map(lambda app: f"apps.{app}", APPLICATIONS)),
@@ -162,8 +164,6 @@ LOGGING = {
     }
 }
 
-
-
 # Email configurations:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = "maktab@mryazdan.ir"
@@ -181,3 +181,15 @@ else:
     EMAIL_HOST_USER = "stoic_bhabha_dtvh2r"
     EMAIL_HOST_PASSWORD = "95b2fd7c-21c16eec6b7f"
     EMAIL_USE_TLS = True
+
+REST_FRAMEWORK = {
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework.permissions.IsAuthenticated",
+    # ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+
+}
