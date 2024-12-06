@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 import django
 import logging
 
@@ -54,6 +56,35 @@ django.setup()
 
 # from apps.book.models import Book
 # Book.objects.create(title="kelile va demne", price=120_000)
-from apps.accounts.models import User
+# from apps.accounts.models import User
+#
+# print(User.objects.last().is_online)
 
-print(User.objects.last().is_online)
+from apps.core.models import UserActivity
+from django.utils import timezone
+#
+# yesterday = timezone.now() - timedelta(days=1)
+#
+# activities = UserActivity.objects.filter(timestamp__date=yesterday.date())
+#
+# print(activities)
+
+from apps.core.tasks import send_daily_activities
+
+send_daily_activities.delay()
+
+# yesterday = timezone.now() - timedelta(days=1)
+# activities = UserActivity.objects.filter(timestamp__date=yesterday.date())
+
+# report_data = list(activities.values("user", "url", "timestamp", "ip"))
+# file_path = f"tmp/{yesterday.date()}.json"
+
+# from django.core import serializers
+
+# assuming obj is a model instance
+# serialized_obj = serializers.serialize('json', activities)
+
+# print(serialized_obj)
+
+# with open(file_path, "w") as json_file:
+#     json.dump(report_data, json_file)

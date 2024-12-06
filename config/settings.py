@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt',
     # 'rest_framework.authtoken',
+    'django_celery_beat',
 
     # Applications:
     *list(map(lambda app: f"apps.{app}", APPLICATIONS)),
@@ -189,7 +190,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # 'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',
-'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 
 }
+
+# Celery conf
+CELERY_BROKER_URL = "redis://0.0.0.0:6379/15"

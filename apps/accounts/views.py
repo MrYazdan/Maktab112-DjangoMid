@@ -1,5 +1,5 @@
 from random import randint
-
+from apps.accounts.tasks import send_welcome_email
 from django.contrib.auth import login
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
@@ -35,6 +35,8 @@ class Sign(View):
     def post(self, request, *args, **kwargs):
         email = self.request.POST.get("email")
         assert email, "Email field must be set !"
+
+        send_welcome_email.delay(email)
 
         if not (code := cache.get(email)):
             code = self.code_generator()
